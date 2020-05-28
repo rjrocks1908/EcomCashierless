@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminCategoryActivity">
+    tools:context=".adminCategoryActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -31,25 +31,29 @@
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/t_shirts"
-            android:src="@drawable/tshirts"/>
+            android:src="@drawable/tshirts"
+            android:layout_weight="25"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/sports_t_shirts"
-            android:src="@drawable/sports"/>
+            android:src="@drawable/sports"
+            android:layout_weight="25"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/female_dresses"
-            android:src="@drawable/female_dresses"/>
+            android:src="@drawable/female_dresses"
+            android:layout_weight="25"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/sweathers"
-            android:src="@drawable/sweather"/>
+            android:src="@drawable/sweather"
+            android:layout_weight="25"/>
     </LinearLayout>
 
     <LinearLayout
