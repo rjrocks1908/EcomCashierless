@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     tools:context=".MainActivity"
-    android:background="@drawable/grad_bg">
+    android:background="@drawable/bg9">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:orientation="vertical"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp">
 
@@ -19,42 +20,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
             android:id="@+id/app_logo_open">
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:id="@+id/app_logo"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background="@drawable/applogo3"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:fontFamily="sans-serif-medium"
-            android:id="@+id/app_slogan"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            android:visibility="gone"
-            android:text=" ASHIER-LESS" />
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/app_logo"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/applogo2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:id="@+id/app_slogan"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="35sp"
+                    android:visibility="visible"
+                    android:text=" ASHIER-LESS" />
+
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rellay1"
-            android:visibility="gone"
-            android:layout_below="@+id/app_logo_open">
+            android:visibility="visible">
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/main_join_now_btn"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="210dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/input_design"
+                android:background="@drawable/buttons"
                 android:padding="10dp"
                 android:textAllCaps="false"
                 android:textSize="15dp"
@@ -77,6 +81,6 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

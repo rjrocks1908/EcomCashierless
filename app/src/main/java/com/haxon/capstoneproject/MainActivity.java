@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout rellay1;
     private TextView appSlogan;
     Handler handler = new Handler(); //for the splash screen
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {       //changing items for the splash screen
-            rellay1.setVisibility(View.VISIBLE);
-            appSlogan.setVisibility(View.VISIBLE);
-        }
-    };
+//    Runnable runnable = new Runnable() {
+//        @Override
+//        public void run() {       //changing items for the splash screen
+//            rellay1.setVisibility(View.VISIBLE);
+//            appSlogan.setVisibility(View.VISIBLE);
+//        }
+//    };
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         rellay1 = findViewById(R.id.rellay1);
         appSlogan = findViewById(R.id.app_slogan);
 
-        handler.postDelayed(runnable,2000);  //delay for the splash screen
+        //handler.postDelayed(runnable,2000);  //delay for the splash screen
 
         joinNowButton = findViewById(R.id.main_join_now_btn);
         loginButton = findViewById(R.id.main_login_btn);

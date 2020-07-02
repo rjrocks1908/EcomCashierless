@@ -49,14 +49,6 @@ public class loginActivity extends AppCompatActivity {
         checkBoxRememberMe = findViewById(R.id.remember_me_checkBox);
         Paper.init(this);
 
-        //login the user through the button login
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser();
-            }
-        });
-
         //Change the login to admin's login and access the admin database
         //remember me feature doesn't work here
         adminLink.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +71,14 @@ public class loginActivity extends AppCompatActivity {
                 notAdminLink.setVisibility(View.INVISIBLE);
                 parentsDbName = "Users";
                 checkBoxRememberMe.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //login the user through the button login
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginUser();
             }
         });
     }
@@ -140,7 +140,7 @@ public class loginActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 //starting the adminAddNewProduct activity
-                                Intent intent = new Intent(loginActivity.this,adminAddNewProductActivity.class);
+                                Intent intent = new Intent(loginActivity.this,adminCategoryActivity.class);
                                 startActivity(intent);
                             }   //Checking the users login
                             else if (parentsDbName.equals("Users")){

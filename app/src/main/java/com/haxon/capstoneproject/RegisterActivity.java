@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button createAccountButton;
     private EditText inputName, inputPhoneNumber, inputPassword;
     private ProgressDialog progressDialog;
+    private String parentDbName = "Users";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +83,14 @@ public class RegisterActivity extends AppCompatActivity {
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {   //Read and listen for changes to the entire contents of a path.
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {  //dataSnapshot contains the data at the specified location in the database
-                if (!(dataSnapshot.child("Users").child(phone).exists())){  //if this number does not exist it will create a new account
+                if (!(dataSnapshot.child(parentDbName).child(phone).exists())){  //if this number does not exist it will create a new account
                     HashMap<String,Object> userdataMap = new HashMap<>();   //storing the values using the HashMap class
                     userdataMap.put("phone",phone);
                     userdataMap.put("name",name);
                     userdataMap.put("password",password);
 
                     //Complete listener it tells the completion of the data i.e to know when the data has been committed
-                    rootRef.child("Users").child(phone).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    rootRef.child(parentDbName).child(phone).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
