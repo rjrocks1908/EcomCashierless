@@ -149,6 +149,7 @@ public class loginActivity extends AppCompatActivity {
 
                                 //starting the home activity
                                 Intent intent = new Intent(loginActivity.this,HomeActivity.class);
+                                Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
                             }
                         }else {
