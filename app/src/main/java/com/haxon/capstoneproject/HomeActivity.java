@@ -79,6 +79,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
         userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -94,12 +96,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Products products) {
+            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Products products) {
 
                 holder.txtProductName.setText(products.getpName());
                 holder.txtProductDescription.setText(products.getDescription());
                 holder.txtProductPrice.setText("Price = Rs." + products.getPrice());
                 Picasso.get().load(products.getImage()).into(holder.imageView);
+
+
+                //to check the product details and change the activity by transferring the pid to that activity
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid",products.getPid());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @NonNull
@@ -154,6 +167,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if (id == R.id.nav_categories){
 
         }else if (id == R.id.nav_settings){
+
+            Intent intent = new Intent(HomeActivity.this,SettingsActivity.class);
+            startActivity(intent);
 
         }else if (id == R.id.nav_logout){
             Paper.book().destroy();

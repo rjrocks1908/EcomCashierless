@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             progressDialog.dismiss();
 
                             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                            Prevalent.currentOnlineUser = usersData;
                             startActivity(intent);
                         }else {
                             progressDialog.dismiss();
