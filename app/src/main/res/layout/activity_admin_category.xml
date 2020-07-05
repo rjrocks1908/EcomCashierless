@@ -12,7 +12,7 @@
         android:id="@+id/slogan_category"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="20dp"
         android:text="Add New Product"
         android:textAlignment="center"
         android:textSize="26sp"
@@ -25,7 +25,7 @@
         android:id="@+id/linear1_category_layout"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="25dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
         android:id="@+id/linear2_category_layout"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="25dp">
 
         <ImageView
             android:layout_width="80dp"
@@ -101,7 +101,7 @@
         android:id="@+id/linear3_category_layout"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="25dp">
 
         <ImageView
             android:layout_width="80dp"
@@ -133,28 +133,45 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/maintain_btn"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@id/check_order_btn"
+        android:background="@drawable/buttons"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Modify Products"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <Button
         android:id="@+id/check_order_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_above="@id/admin_logout_btn"
         android:background="@drawable/buttons"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
         android:text="Check New Orders"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="16sp"/>
 
     <Button
         android:id="@+id/admin_logout_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/buttons"
-        android:layout_margin="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
         android:text="Logout"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="16sp"/>
 
 </RelativeLayout>
