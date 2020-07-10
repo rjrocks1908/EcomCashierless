@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.haxon.capstoneproject.Admin.adminCategoryActivity;
 import com.haxon.capstoneproject.Models.Users;
 import com.haxon.capstoneproject.Prevalent.Prevalent;
 import com.rey.material.widget.CheckBox;
@@ -30,7 +31,7 @@ public class loginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String parentsDbName = "Users";
     private CheckBox checkBoxRememberMe;
-    private TextView adminLink, notAdminLink;
+    private TextView adminLink, notAdminLink, forgetPasswordLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,18 @@ public class loginActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         adminLink = findViewById(R.id.admin_panel_link);
         notAdminLink = findViewById(R.id.not_admin_panel_link);
+        forgetPasswordLink = findViewById(R.id.forget_password_link);
+
+        forgetPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(loginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("check", "login");
+                startActivity(intent);
+
+            }
+        });
 
         //Connecting the UI of checkBox with the java file.
         checkBoxRememberMe = findViewById(R.id.remember_me_checkBox);
@@ -140,7 +153,7 @@ public class loginActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 //starting the adminAddNewProduct activity
-                                Intent intent = new Intent(loginActivity.this,adminCategoryActivity.class);
+                                Intent intent = new Intent(loginActivity.this, adminCategoryActivity.class);
                                 startActivity(intent);
                             }   //Checking the users login
                             else if (parentsDbName.equals("Users")){

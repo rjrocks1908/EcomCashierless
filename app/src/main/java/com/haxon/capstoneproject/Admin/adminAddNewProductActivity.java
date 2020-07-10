@@ -1,4 +1,4 @@
-package com.haxon.capstoneproject;
+package com.haxon.capstoneproject.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.haxon.capstoneproject.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

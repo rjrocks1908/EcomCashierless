@@ -1,4 +1,4 @@
-package com.haxon.capstoneproject;
+package com.haxon.capstoneproject.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.haxon.capstoneproject.Models.Cart;
 import com.haxon.capstoneproject.Prevalent.Prevalent;
+import com.haxon.capstoneproject.R;
 import com.haxon.capstoneproject.ViewHolder.CartViewHolder;
 
 public class AdminUserProductsActivity extends AppCompatActivity {

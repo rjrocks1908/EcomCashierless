@@ -110,5 +110,16 @@
             android:textColorHint="@color/white"
             android:background="@drawable/input_design"/>
 
+        <Button
+            android:id="@+id/security_questions_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:text="Set Security Questions"/>
+
     </LinearLayout>
 </ScrollView>

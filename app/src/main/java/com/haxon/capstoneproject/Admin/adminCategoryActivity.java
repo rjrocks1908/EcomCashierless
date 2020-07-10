@@ -1,4 +1,4 @@
-package com.haxon.capstoneproject;
+package com.haxon.capstoneproject.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.haxon.capstoneproject.HomeActivity;
+import com.haxon.capstoneproject.MainActivity;
+import com.haxon.capstoneproject.R;
 
 public class adminCategoryActivity extends AppCompatActivity {
 
