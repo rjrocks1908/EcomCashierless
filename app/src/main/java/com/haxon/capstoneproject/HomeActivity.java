@@ -206,7 +206,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
 
-        }else if (id == R.id.nav_categories){
+        }else if (id == R.id.nav_qrCode){
+
+            if (!type.equals("Admin")){
+
+                Intent intent = new Intent(HomeActivity.this,QRCodeActivity.class);
+                startActivity(intent);
+
+            }
 
         }else if (id == R.id.nav_settings){
 

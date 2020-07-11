@@ -161,7 +161,7 @@ public class loginActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 //starting the home activity
-                                Intent intent = new Intent(loginActivity.this,HomeActivity.class);
+                                Intent intent = new Intent(loginActivity.this,QRCodeActivity.class);
                                 Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
                             }

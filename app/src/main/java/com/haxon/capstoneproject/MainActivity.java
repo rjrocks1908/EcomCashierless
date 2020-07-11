@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "logged in successfully...", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
 
-                            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                            Intent intent = new Intent(MainActivity.this,QRCodeActivity.class);
                             Prevalent.currentOnlineUser = usersData;
                             startActivity(intent);
                         }else {

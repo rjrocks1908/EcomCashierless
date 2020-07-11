@@ -101,7 +101,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                     if (dataSnapshot.exists()){
 
-                        String mPhone = dataSnapshot.child("phone").getValue().toString();
+                        //String mPhone = dataSnapshot.child("phone").getValue().toString();
 
                         //if (phone.equals(mPhone)){
 
@@ -232,7 +232,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     String ans2 = dataSnapshot.child("answer2").getValue().toString();
 
                     question1.setText(ans1);
-                    question2.setText(ans1);
+                    question2.setText(ans2);
                 }
 
             }

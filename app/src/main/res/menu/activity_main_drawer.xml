@@ -5,9 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/nav_cart"
-            android:title="Cart"
+            android:id="@+id/nav_qrCode"
+            android:icon="@drawable/qr"
+            android:title="QR Code"
             android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_search"
@@ -15,9 +15,9 @@
             android:title="Search"
             android:iconTint="@color/white"/>
         <item
-            android:id="@+id/nav_categories"
-            android:icon="@drawable/category"
-            android:title="Categories"
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/nav_cart1"
+            android:title="Cart"
             android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_settings"
@@ -26,7 +26,7 @@
             android:iconTint="@color/white"/>
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/logout"
+            android:icon="@drawable/logoutlogo"
             android:title="Logout"
             android:iconTint="@color/white"/>
 
