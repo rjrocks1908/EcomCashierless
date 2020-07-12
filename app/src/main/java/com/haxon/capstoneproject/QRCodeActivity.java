@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -27,15 +28,26 @@ public class QRCodeActivity extends AppCompatActivity {
     private ImageButton nextBtn;
     private ImageView qrCode;
     private TextView userName;
+    private String check = "";
+    private RelativeLayout toolBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_q_r_code);
 
+        check = getIntent().getStringExtra("checkQR");
+
+        toolBarLayout = findViewById(R.id.qr_toolBar_layout);
         nextBtn = findViewById(R.id.qr_next_btn);
         qrCode = findViewById(R.id.qr_code_image);
         userName = findViewById(R.id.qr_user_name_display);
+
+        if (!check.equals("home")){
+
+            toolBarLayout.setVisibility(View.VISIBLE);
+
+        }
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +55,7 @@ public class QRCodeActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(QRCodeActivity.this,HomeActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -77,7 +90,7 @@ public class QRCodeActivity extends AppCompatActivity {
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(Prevalent.currentOnlineUser.getPhone(), BarcodeFormat.QR_CODE,500,500);
+            BitMatrix bitMatrix = multiFormatWriter.encode(Prevalent.currentOnlineUser.getPhone(), BarcodeFormat.QR_CODE,600,600);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrCode.setImageBitmap(bitmap);

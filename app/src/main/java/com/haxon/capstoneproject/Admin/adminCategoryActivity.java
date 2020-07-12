@@ -14,8 +14,8 @@ import com.haxon.capstoneproject.R;
 
 public class adminCategoryActivity extends AppCompatActivity {
 
-    private ImageView tShirts, sportsTShirts, femaleDresses, sweaters;
-    private ImageView glasses, walletsBagPurses, hatsCaps, shoes;
+    private ImageView foodItems, footWear, books, grooming;
+    private ImageView sports, walletsBagPurses, hatsCaps, shoes;
     private ImageView headphonesHandFree, laptops, watches, mobilePhones;
     private Button logoutBtn, checkOrderBtn, maintainProductsBtn;
 
@@ -56,11 +56,11 @@ public class adminCategoryActivity extends AppCompatActivity {
             }
         });
 
-        tShirts = findViewById(R.id.t_shirts);
-        sportsTShirts = findViewById(R.id.sports_t_shirts);
-        femaleDresses = findViewById(R.id.female_dresses);
-        sweaters = findViewById(R.id.sweathers);
-        glasses = findViewById(R.id.glasses);
+        foodItems = findViewById(R.id.foodItems);
+        footWear = findViewById(R.id.footWear);
+        books = findViewById(R.id.Books);
+        grooming = findViewById(R.id.Grooming);
+        sports = findViewById(R.id.sports);
         walletsBagPurses = findViewById(R.id.purses_bag_wallets);
         hatsCaps = findViewById(R.id.hats_caps);
         shoes = findViewById(R.id.shoes);
@@ -69,47 +69,47 @@ public class adminCategoryActivity extends AppCompatActivity {
         watches = findViewById(R.id.watches);
         mobilePhones = findViewById(R.id.mobilephones);
 
-        tShirts.setOnClickListener(new View.OnClickListener() {
+        foodItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(adminCategoryActivity.this, adminAddNewProductActivity.class);
-                intent.putExtra("category","TShirts");
+                intent.putExtra("category","Food Items");
                 startActivity(intent);
             }
         });
 
-        sportsTShirts.setOnClickListener(new View.OnClickListener() {
+        footWear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(adminCategoryActivity.this, adminAddNewProductActivity.class);
-                intent.putExtra("category","Sports TShirts");
+                intent.putExtra("category","Foot Wear");
                 startActivity(intent);
             }
         });
 
-        femaleDresses.setOnClickListener(new View.OnClickListener() {
+        books.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(adminCategoryActivity.this, adminAddNewProductActivity.class);
-                intent.putExtra("category","Female Dresses");
+                intent.putExtra("category","Books");
                 startActivity(intent);
             }
         });
 
-        sweaters.setOnClickListener(new View.OnClickListener() {
+        grooming.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(adminCategoryActivity.this, adminAddNewProductActivity.class);
-                intent.putExtra("category","Sweaters");
+                intent.putExtra("category","Grooming");
                 startActivity(intent);
             }
         });
 
-        glasses.setOnClickListener(new View.OnClickListener() {
+        sports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(adminCategoryActivity.this, adminAddNewProductActivity.class);
-                intent.putExtra("category","Glasses");
+                intent.putExtra("category","Sports");
                 startActivity(intent);
             }
         });

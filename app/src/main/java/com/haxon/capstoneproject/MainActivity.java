@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -28,14 +29,20 @@ public class MainActivity extends AppCompatActivity {
     private Button joinNowButton, loginButton;
     private RelativeLayout rellay1;
     private TextView appSlogan;
-    Handler handler = new Handler(); //for the splash screen
+    private String count = "";
+
+//    Handler handler = new Handler(); //for the splash screen
 //    Runnable runnable = new Runnable() {
 //        @Override
 //        public void run() {       //changing items for the splash screen
-//            rellay1.setVisibility(View.VISIBLE);
-//            appSlogan.setVisibility(View.VISIBLE);
+//
+//            Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//
 //        }
 //    };
+
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         rellay1 = findViewById(R.id.rellay1);
         appSlogan = findViewById(R.id.app_slogan);
+
 
         //handler.postDelayed(runnable,2000);  //delay for the splash screen
 
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,loginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -77,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         if (usersPhoneKey != "" && usersPasswordKey != ""){
             if (!TextUtils.isEmpty(usersPhoneKey) && !TextUtils.isEmpty(usersPasswordKey)){
 
+                //SystemClock.sleep(2500);
                 progressDialog.setTitle("Login Account");
                 progressDialog.setMessage("Please wait...");
                 progressDialog.setCanceledOnTouchOutside(false);
@@ -87,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private void allowAccess(final String phone, final String password) {
 
@@ -108,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(MainActivity.this,QRCodeActivity.class);
                             Prevalent.currentOnlineUser = usersData;
+                            intent.putExtra("checkQR","main");
                             startActivity(intent);
+                            finish();
                         }else {
                             progressDialog.dismiss();
                             Toast.makeText(MainActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();

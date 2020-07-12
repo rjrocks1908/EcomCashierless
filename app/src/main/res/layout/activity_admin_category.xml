@@ -28,31 +28,31 @@
         android:layout_marginTop="25dp">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/t_shirts"
-            android:src="@drawable/tshirts"
+            android:id="@+id/foodItems"
+            android:src="@drawable/category_fooditem"
             android:layout_weight="25"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/sports_t_shirts"
-            android:src="@drawable/sports"
+            android:id="@+id/footWear"
+            android:src="@drawable/category_footwear"
             android:layout_weight="25"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/female_dresses"
-            android:src="@drawable/female_dresses"
+            android:id="@+id/Books"
+            android:src="@drawable/category_books"
             android:layout_weight="25"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/sweathers"
-            android:src="@drawable/sweather"
+            android:id="@+id/Grooming"
+            android:src="@drawable/category_appliances"
             android:layout_weight="25"/>
     </LinearLayout>
 
@@ -68,8 +68,8 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/glasses"
-            android:src="@drawable/glasses"
+            android:id="@+id/sports"
+            android:src="@drawable/category_sports"
             android:layout_weight="25"/>
 
         <ImageView

@@ -40,7 +40,7 @@ public class adminAddNewProductActivity extends AppCompatActivity {
     private static final int galleryPick = 1;
     private Uri imageUri;
     private StorageReference productImagesRef;
-    private DatabaseReference productRef;
+    private DatabaseReference productRef, productByCategory;
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class adminAddNewProductActivity extends AppCompatActivity {
         categoryName = getIntent().getExtras().get("category").toString();
         productImagesRef = FirebaseStorage.getInstance().getReference().child("Product Image");
         productRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        productByCategory = FirebaseDatabase.getInstance().getReference().child("ProductsByCategory").child(categoryName);
 
         progressDialog = new ProgressDialog(this);
         addNewProductButton = findViewById(R.id.add_new_product);
@@ -191,6 +192,7 @@ public class adminAddNewProductActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Intent intent = new Intent(adminAddNewProductActivity.this,adminCategoryActivity.class);
                     startActivity(intent);
+                    finish();
 
                     progressDialog.dismiss();
                     Toast.makeText(adminAddNewProductActivity.this, "Product is added successfully...", Toast.LENGTH_SHORT).show();
@@ -199,6 +201,13 @@ public class adminAddNewProductActivity extends AppCompatActivity {
                     String message = task.getException().toString();
                     Toast.makeText(adminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        productByCategory.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
             }
         });
     }

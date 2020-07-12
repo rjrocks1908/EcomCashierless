@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     tools:context=".MainActivity"
-    android:background="@drawable/bg9">
+    android:background="@drawable/bg10">
 
     <LinearLayout
         android:layout_width="wrap_content"

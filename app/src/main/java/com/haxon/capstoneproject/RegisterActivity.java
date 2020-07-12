@@ -99,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(RegisterActivity.this,loginActivity.class);
                                 startActivity(intent);
+                                finish();
                             }else {
                                 Toast.makeText(RegisterActivity.this, "Network Error! Please try again", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();

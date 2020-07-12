@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -22,11 +23,14 @@ import com.haxon.capstoneproject.ViewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private FrameLayout frameLayout;
 
     private String type = "";
 
@@ -44,6 +49,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         //this line validates if the intent contains something or not
         Intent intent = getIntent();
@@ -58,25 +64,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Paper.init(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (!type.equals("Admin")){
-
-                    Intent intent = new Intent(HomeActivity.this,CartActivity.class);
-                    startActivity(intent);
-
-                }
-
-            }
-        });
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -85,6 +74,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        frameLayout = findViewById(R.id.home_frameLayout);
+        setFragment(new HomeFragment2());
 
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
@@ -100,6 +92,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+
     }
 
     @Override
@@ -127,12 +121,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                             Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
                             intent.putExtra("pid",products.getPid());
+                            intent.putExtra("category",products.getCategory());
                             startActivity(intent);
 
                         }else{
 
                             Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
                             intent.putExtra("pid",products.getPid());
+                            intent.putExtra("image",products.getImage());
                             startActivity(intent);
 
                         }
@@ -175,9 +171,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-//        if (id == R.id.action_settings){
-//            return true;
-//        }
+        if (id == R.id.actionBar_search_icon){
+            Intent intent = new Intent(HomeActivity.this,SearchProductsActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.actionBar_cart_icon){
+
+            if (!type.equals("Admin")){
+
+                Intent intent = new Intent(HomeActivity.this,CartActivity.class);
+                startActivity(intent);
+
+            }
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -211,6 +216,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             if (!type.equals("Admin")){
 
                 Intent intent = new Intent(HomeActivity.this,QRCodeActivity.class);
+                intent.putExtra("checkQR","home");
                 startActivity(intent);
 
             }
@@ -243,5 +249,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setFragment(Fragment fragment){
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout.getId(), fragment);
+        fragmentTransaction.commit();
+
     }
 }

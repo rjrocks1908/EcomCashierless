@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.haxon.capstoneproject.Models.Cart;
 import com.haxon.capstoneproject.Prevalent.Prevalent;
 import com.haxon.capstoneproject.ViewHolder.CartViewHolder;
+import com.squareup.picasso.Picasso;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -58,7 +59,7 @@ public class CartActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        CheckOrderState();
+        //CheckOrderState();
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
@@ -73,6 +74,7 @@ public class CartActivity extends AppCompatActivity {
                 holder.txtProductQuantity.setText("Quantity = " + cart.getQuantity());
                 holder.txtProductPrice.setText("Price = Rs." + cart.getPrice() + "per piece ");
                 holder.txtProductName.setText(cart.getpName());
+                Picasso.get().load(cart.getImage()).into(holder.imgProductImage);
 
                 int oneTypeProductTPrice = ((Integer.valueOf(cart.getPrice()))) * ((Integer.valueOf(cart.getQuantity())));
                 overAllTotalPrice += oneTypeProductTPrice;
@@ -117,8 +119,9 @@ public class CartActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()){
                                                         Toast.makeText(CartActivity.this, "Item removed", Toast.LENGTH_SHORT).show();
-//                                                        Intent intent = new Intent(CartActivity.this,CartActivity.class);
-//                                                        startActivity(intent);
+                                                        Intent intent = new Intent(CartActivity.this,CartActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
                                                     }
                                                 }
                                             });

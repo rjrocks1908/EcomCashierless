@@ -2,16 +2,25 @@ package com.haxon.capstoneproject.Models;
 
 public class Cart {
 
-    private String pid, pName, price, quantity, discount;
+    private String pid, pName, price, quantity, discount, image;
 
     public Cart(){}
 
-    public Cart(String pid, String pName, String price, String quantity, String discount) {
+    public Cart(String pid, String pName, String price, String quantity, String discount, String image) {
         this.pid = pid;
         this.pName = pName;
         this.price = price;
         this.quantity = quantity;
         this.discount = discount;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getPid() {

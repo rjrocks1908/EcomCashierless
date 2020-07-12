@@ -6,8 +6,10 @@ import io.paperdb.Paper;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -96,6 +98,16 @@ public class loginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(loginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
     //This method login the user by checking the credentials
     private void loginUser(){
 
@@ -112,6 +124,9 @@ public class loginActivity extends AppCompatActivity {
             progressDialog.setMessage("Please wait, while we are checking the credentials.");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
+
+//            loginButton.setEnabled(false);
+//            loginButton.setTextColor(Color.argb(50,255,255,255));
 
             //allow access to the account.
             allowAccessToAccount(phone,password);
@@ -155,6 +170,7 @@ public class loginActivity extends AppCompatActivity {
                                 //starting the adminAddNewProduct activity
                                 Intent intent = new Intent(loginActivity.this, adminCategoryActivity.class);
                                 startActivity(intent);
+                                finish();
                             }   //Checking the users login
                             else if (parentsDbName.equals("Users")){
                                 Toast.makeText(loginActivity.this, "logged in successfully...", Toast.LENGTH_SHORT).show();
@@ -162,8 +178,10 @@ public class loginActivity extends AppCompatActivity {
 
                                 //starting the home activity
                                 Intent intent = new Intent(loginActivity.this,QRCodeActivity.class);
+                                intent.putExtra("checkQR","login");
                                 Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
+                                finish();
                             }
                         }else {
                             progressDialog.dismiss();

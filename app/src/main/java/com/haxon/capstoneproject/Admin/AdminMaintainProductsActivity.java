@@ -29,8 +29,8 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
     private EditText name, price, description;
     private ImageView imageView;
 
-    private String productID = "";
-    private DatabaseReference productRef;
+    private String productID = "", productCategory = "";
+    private DatabaseReference productRef, productByCategoryRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,9 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_maintain_products);
 
         productID = getIntent().getStringExtra("pid");
+        productCategory = getIntent().getStringExtra("category");
         productRef = FirebaseDatabase.getInstance().getReference().child("Products").child(productID);
+        productByCategoryRef = FirebaseDatabase.getInstance().getReference().child("ProductByCategory").child(productCategory).child(productID);
 
         applyChangesBtn = findViewById(R.id.apply_changes_btn);
         name = findViewById(R.id.product_name_maintain);
@@ -70,6 +72,13 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
     }
 
     private void deleteThisProduct() {
+
+        productByCategoryRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
 
         productRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -103,6 +112,13 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
             productMap.put("description", pDescription);
             productMap.put("price", pPrice);
             productMap.put("pName", pName);
+
+            productByCategoryRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
 
             productRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

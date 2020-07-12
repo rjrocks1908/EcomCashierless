@@ -1,6 +1,7 @@
 package com.haxon.capstoneproject.ViewHolder;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.haxon.capstoneproject.Interface.ItemClickListner;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView txtProductName, txtProductPrice, txtProductQuantity;
+    public ImageView imgProductImage;
     private ItemClickListner itemClickListner;
 
     public CartViewHolder(@NonNull View itemView) {
@@ -20,6 +22,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         txtProductName = itemView.findViewById(R.id.cart_product_name);
         txtProductPrice = itemView.findViewById(R.id.cart_product_price);
         txtProductQuantity = itemView.findViewById(R.id.cart_product_quantity);
+        imgProductImage = itemView.findViewById(R.id.cart_product_image);
     }
 
 

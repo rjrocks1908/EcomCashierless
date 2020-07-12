@@ -34,7 +34,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private ElegantNumberButton numberButton;
     private TextView productPrice, productDescription, productName;
-    private String productID = "", state = "Normal";
+    private String productID = "", state = "Normal", productImg = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
 
         productID = getIntent().getStringExtra("pid");
+        productImg = getIntent().getStringExtra("image");
 
         addToCartButton = findViewById(R.id.pd_add_to_cart_btn);
         numberButton = findViewById(R.id.number_btn);
@@ -61,7 +62,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     Toast.makeText(ProductDetailsActivity.this, "you can purchase more products, once your order is shipped or confirmed.", Toast.LENGTH_LONG).show();
                     
                 }else{
-                    addingToCartList();
+                    addingToCartList(productImg);
                 }
             }
         });
@@ -75,7 +76,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void addingToCartList() {
+    private void addingToCartList(String productImg) {
 
         String saveCurrentTime, saveCurrentDate;
 
@@ -96,6 +97,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("time",saveCurrentTime);
         cartMap.put("quantity",numberButton.getNumber());
         cartMap.put("discount","");
+        cartMap.put("image",productImg);
 
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
                 .child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -113,6 +115,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         }
                     });
