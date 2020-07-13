@@ -3,11 +3,16 @@ package com.haxon.capstoneproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +21,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,13 +40,24 @@ import com.google.firebase.database.ValueEventListener;
 import com.haxon.capstoneproject.Models.Cart;
 import com.haxon.capstoneproject.Prevalent.Prevalent;
 import com.haxon.capstoneproject.ViewHolder.CartViewHolder;
+import com.paytm.pgsdk.PaytmOrder;
+import com.paytm.pgsdk.PaytmPGService;
+import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class CartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button nextProcessBtn;
+    private ProgressDialog progressDialog;
     private TextView txtTotalAmount, txtMsg1;
 
     private int overAllTotalPrice = 0;
@@ -49,6 +72,7 @@ public class CartActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        progressDialog = new ProgressDialog(this);
         nextProcessBtn = findViewById(R.id.next_process_btn);
         txtTotalAmount = findViewById(R.id.total_price);
         txtMsg1 = findViewById(R.id.msg1);
@@ -85,12 +109,18 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+
+                        Intent intent = new Intent(CartActivity.this, CheckSumActivity.class);
                         intent.putExtra("Total Price", String.valueOf(overAllTotalPrice));
                         startActivity(intent);
                         finish();
                     }
                 });
+
+                if (ContextCompat.checkSelfPermission(CartActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(CartActivity.this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
+                }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
