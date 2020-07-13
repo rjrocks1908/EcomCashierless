@@ -73,6 +73,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
 
     private void deleteThisProduct() {
 
+
         productByCategoryRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

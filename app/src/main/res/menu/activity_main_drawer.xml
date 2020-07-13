@@ -10,6 +10,11 @@
             android:title="QR Code"
             android:iconTint="@color/white"/>
         <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/account_circle"
+            android:title="My Profile"
+            android:iconTint="@color/white"/>
+        <item
             android:id="@+id/nav_search"
             android:icon="@drawable/search"
             android:title="Search"
@@ -20,15 +25,9 @@
             android:title="Cart"
             android:iconTint="@color/white"/>
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Settings"
-            android:iconTint="@color/white"/>
-        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logoutlogo"
             android:title="Logout"
             android:iconTint="@color/white"/>
-
     </group>
 </menu>

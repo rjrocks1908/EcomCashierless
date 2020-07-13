@@ -1,5 +1,6 @@
 package com.haxon.capstoneproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -7,8 +8,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.haxon.capstoneproject.Prevalent.Prevalent;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -23,7 +33,10 @@ import java.util.UUID;
 
 public class CheckSumActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback {
 
-    String custid = "", orderId = "", mid = "";
+    String custid = "", orderId = "", mid = "", totalAmount = "";
+    private ImageView continueShoppingBtn;
+    private TextView txtOrderId;
+    private RelativeLayout checksumOrderLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +46,17 @@ public class CheckSumActivity extends AppCompatActivity implements PaytmPaymentT
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Intent intent = getIntent();
+        totalAmount = getIntent().getStringExtra("Total Price");
         orderId = UUID.randomUUID().toString().substring(0,28);
         custid = Prevalent.currentOnlineUser.getPhone();
 
-        mid = "hMgITY02770192320114"; /// your marchant key
+        continueShoppingBtn = findViewById(R.id.checksum_next_image);
+        txtOrderId = findViewById(R.id.checksum_order_id);
+        checksumOrderLayout = findViewById(R.id.checksum_RL);
+
+        mid = "hMgITY02770192320114";   // Merchant key
         sendUserDetailTOServerdd dl = new sendUserDetailTOServerdd();
         dl.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-// vollye , retrofit, asynch
 
     }
 
@@ -65,7 +82,7 @@ public class CheckSumActivity extends AppCompatActivity implements PaytmPaymentT
                     "MID="+mid+
                             "&ORDER_ID=" + orderId+
                             "&CUST_ID="+custid+
-                            "&CHANNEL_ID=WAP&TXN_AMOUNT=100&WEBSITE=WEBSTAGING"+
+                            "&CHANNEL_ID=WAP&TXN_AMOUNT="+totalAmount+"&WEBSITE=WEBSTAGING"+
                             "&CALLBACK_URL="+ varifyurl+"&INDUSTRY_TYPE_ID=Retail";
 
             JSONObject jsonObject = jsonParser.makeHttpRequest(url,"POST",param);
@@ -104,7 +121,7 @@ public class CheckSumActivity extends AppCompatActivity implements PaytmPaymentT
             paramMap.put("ORDER_ID", orderId);
             paramMap.put("CUST_ID", custid);
             paramMap.put("CHANNEL_ID", "WAP");
-            paramMap.put("TXN_AMOUNT", "100");
+            paramMap.put("TXN_AMOUNT", totalAmount);
             paramMap.put("WEBSITE", "WEBSTAGING");
             paramMap.put("CALLBACK_URL" ,varifyurl);
             //paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
@@ -129,31 +146,71 @@ public class CheckSumActivity extends AppCompatActivity implements PaytmPaymentT
     @Override
     public void onTransactionResponse(Bundle bundle) {
         Log.e("checksum ", " respon true " + bundle.toString());
+        //Toast.makeText(getApplicationContext(), "Payment Transaction response " + bundle.toString(), Toast.LENGTH_LONG).show();
+
+        if (bundle.getString("STATUS").equals("TXN_SUCCESS")){
+
+            txtOrderId.setText("Order Id = "+ bundle.getString("ORDERID"));
+            checksumOrderLayout.setVisibility(View.VISIBLE);
+            continueShoppingBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+//                    Intent intent = new Intent(CheckSumActivity.this,HomeActivity.class);
+//                    startActivity(intent);
+                    finish();
+
+                }
+            });
+
+            DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
+                    .child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products");
+
+            DatabaseReference cartRefAdmin = FirebaseDatabase.getInstance().getReference().child("Cart List")
+                    .child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Products");
+
+            cartRefAdmin.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+
+            cartRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
     }
 
     @Override
     public void networkNotAvailable() {
-
+        Toast.makeText(getApplicationContext(), "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void clientAuthenticationFailed(String s) {
-
+        Toast.makeText(getApplicationContext(), "Authentication failed: Server error" + s.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void someUIErrorOccurred(String s) {
         Log.e("checksum ", " ui fail respon  "+ s );
+        Toast.makeText(getApplicationContext(), "UI Error " + s , Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onErrorLoadingWebPage(int i, String s, String s1) {
-        Log.e("checksum ", " error loading pagerespon true "+ s + "  s1 " + s1);
+        Log.e("checksum ", " error loading page response true "+ s + "  s1 " + s1);
+        Toast.makeText(getApplicationContext(), "Unable to load webpage " + s.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressedCancelTransaction() {
         Log.e("checksum ", " cancel call back respon  " );
+        Toast.makeText(getApplicationContext(), "Transaction cancelled" , Toast.LENGTH_LONG).show();
     }
 
     @Override
